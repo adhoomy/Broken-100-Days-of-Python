@@ -4,13 +4,19 @@ def encrypt(text, shift):
     cipher_text = []
     for letter in text:
         cipher_text.append(alphabet[(alphabet.index(letter)+shift)%26])
-    print(f"The encoded text is {cipher_text}")
+    final_cipher = str()
+    for letter in cipher_text:
+        final_cipher += letter
+    print(f"The encoded text is {final_cipher}")
 
 def decrypt(text, shift):
     decipher_text = []
     for letter in text:
         decipher_text.append(alphabet[(alphabet.index(letter)-shift)%26])
-    print(f"The decoded text is {decipher_text}")
+    final_decipher = str()
+    for letter in decipher_text:
+        final_decipher += letter
+    print(f"The decoded text is {final_decipher}")
 
 def keepGoing(choice):
     if choice == "yes":
@@ -38,5 +44,3 @@ while go==True:
         go=keepGoing(choice)
     else:
         direction = input('Type "encode" to encrypt, type "decode" to decrypt:\n')
-
-# what to work on: print the encoded and decoded lists as strings
