@@ -41,8 +41,10 @@ while lives > 0:
     # after checking a letter, if there are no '_' in the display, then the display is completed and you win
     if '_' not in display:
         print("You Win!")
+        print(f"The word was {chosenWord}.")
         lives = -1
 
 # if lives reaches 0, then you lose
 if lives==0:
     print("You Lose!")
+    print(f"The word was {chosenWord}.")
