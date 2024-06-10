@@ -1,7 +1,3 @@
-# if computer is over 21, user wins
-# see if you can optimize the code more
-# make if computer < 17 into a function
-
 from replit import clear
 import art
 import random
@@ -17,7 +13,8 @@ def printFinals(userCards, compCards, userCardSum, compCardSum):
     print(f"Computer's hand is {compCards}, with a score of {compCardSum}.")
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-# cards are not removed from deck when drawn, each card in list will have equal probability
+# cards are not removed from deck when drawn
+# each card in list will have equal probability even if drawn previously
 
 def blackjack(cards):
         clear()
@@ -33,23 +30,30 @@ def blackjack(cards):
             choice2 = (input("Please type a valid input: ")).lower()
         
         if choice2=="n":
+            clear()
+            print(art.logo)
             printFinals(userCards, compCards, userCardSum, compCardSum)
             while compCardSum < 17:
                 compCards.append(cards[random.choice(cards)])
                 compCardSum = sumOfCards(compCards)
                 clear()
                 print(art.logo)
-                print(f"The Computer score is {compCardSum-compCardSum[-1]}, Computer will draw another card.")
+                print(f"The Computer score is {compCardSum-compCards[-1]}, Computer will draw another card.")
                 printFinals(userCards, compCards, userCardSum, compCardSum)
-            if userCardSum > compCardSum:
+            
+            if compCardSum > 21:
+                print("Computer's score went over 21. You win.")
+            elif userCardSum > compCardSum:
                 if compCardSum < 17:
                     print("Your final score is greater than the Computer's. You win.")
-            if compCardSum > userCardSum:
+            elif compCardSum > userCardSum:
                 print("Your final score is less than the Computer's. You lose.")
-            if userCardSum == compCardSum:
+            elif userCardSum == compCardSum:
                 print("Your final score is equal to the Computer's. Draw.")
         
         if choice2=="y":
+            clear()
+            print(art.logo)
             userCards.append(cards[random.choice(cards)])
             userCardSum = sumOfCards(userCards)
             printFinals(userCards, compCards, userCardSum, compCardSum)
@@ -58,18 +62,21 @@ def blackjack(cards):
                 compCardSum = sumOfCards(compCards)
                 clear()
                 print(art.logo)
-                print(f"The Computer score is {compCardSum-compCardSum[-1]}, Computer will draw another card.")
+                print(f"The Computer score is {compCardSum-compCards[-1]}, Computer will draw another card.")
                 printFinals(userCards, compCards, userCardSum, compCardSum)
-            if userCardSum > 21:
+            
+            if compCardSum > 21:
+                print("Computer's score went over 21. You win.")
+            elif userCardSum > 21:
                 if userCards[2]==11:
                     userCards[2] = 1
                 if userCardSum > 21:
                     print("Your final score is greater than 21. You lose.")
-            if userCardSum > compCardSum and userCardSum < 22:
-                print("Your final score is greater than the Computer's. You win.")            
-            if compCardSum > userCardSum:
+            elif userCardSum > compCardSum and userCardSum < 22:
+                print("Your final score is greater than the Computer's. You win.")
+            elif compCardSum > userCardSum:
                 print("Your final score is less than the Computer's. You lose.")
-            if userCardSum == compCardSum:
+            elif userCardSum == compCardSum:
                 print("Your final score is equal to the Computer's. Draw.")
 
         choice3 = (input("Do you want to play another game of Blackjack? type 'y' or 'n': ")).lower()
