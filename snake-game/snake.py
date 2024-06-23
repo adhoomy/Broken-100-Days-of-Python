@@ -14,15 +14,8 @@ class Snake:
         self.head = self.snake[0]
 
     def create_snake(self):
-        x_cord = 0
         for position in STARTING_POSITIONS:
-            new_part = Turtle()
-            new_part.penup()
-            new_part.goto(position)
-            new_part.shape("square")
-            new_part.color("green")
-            x_cord -= 20
-            self.snake.append(new_part)
+            self.add_part(position)
 
     def move(self):
         # makes the parts of the snake follow the part ahead of it
@@ -47,3 +40,14 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def extend(self):
+        self.add_part(self.snake[-1].position())
+
+    def add_part(self, position):
+        new_part = Turtle()
+        new_part.penup()
+        new_part.goto(position)
+        new_part.shape("square")
+        new_part.color("green")
+        self.snake.append(new_part)
