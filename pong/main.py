@@ -33,7 +33,7 @@ while game_on:
         ball.bounce_y()
 
     # detect ball hitting right paddle
-    if ball.distance(r_paddle) < 50 and ball.xcor() > 330 or ball.distance(l_paddle) < 50 and ball.xcor() > -330:
+    if (ball.distance(r_paddle) < 50 and ball.xcor() > 330) or (ball.distance(l_paddle) < 50 and ball.xcor() > -330):
         ball.bounce_x()
 
     # detect ball going out of bounds
