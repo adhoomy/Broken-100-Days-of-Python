@@ -36,14 +36,14 @@ while game_on:
 
     # detect snake touching wall
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
 
     # detect snake hitting itself
     for part in snake.snake[1:]:
         # skip the first part (the head)
         if snake.head.distance(part) < 10:
-            game_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
 
 screen.exitonclick()

@@ -51,3 +51,10 @@ class Snake:
         new_part.shape("square")
         new_part.color("green")
         self.snake.append(new_part)
+
+    def reset(self):
+        for part in self.snake:
+            part.goto(1000, 1000)
+        self.snake.clear()
+        self.create_snake()
+        self.head = self.snake[0]
