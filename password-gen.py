@@ -7,9 +7,9 @@ symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 options = [letters, numbers, symbols]
 
 print("Welcome to the Password Generator!")
-nr_letters= int(input("How many letters would you like in your password? "))
-nr_numbers = int(input(f"How many numbers would you like? "))
-nr_symbols = int(input(f"How many symbols would you like? "))
+nr_letters = random.randint(8, 10)
+nr_numbers = random.randint(2, 4)
+nr_symbols = random.randint(2, 4)
 
 total = nr_letters + nr_numbers + nr_symbols
 
