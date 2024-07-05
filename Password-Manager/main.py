@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
 import pyperclip
+import json
 
 
 def generate_password():
@@ -32,20 +33,31 @@ def save_account_info():
     website = website_entry.get()
     email_or_username = email_or_username_entry.get()
     password = password_entry.get()
+    new_data = {
+        website: {
+            "email": email_or_username,
+            "password": password
+        }
+    }
 
     if website == "" or email_or_username == "" or password == "":
         messagebox.showinfo(title="Info Incomplete", message="Please make sure any fields aren't empty.")
     else:
-        is_ok = messagebox.askokcancel(title="Account Info", message=f"These are the details you've provided:\n\n"
-                                                                     f"Website: {website}\n"
-                                                                     f"Email/Username: {email_or_username}\n"
-                                                                     f"Password: {password}\n\n"
-                                                                     f"Press ok to save.")
+        try:
+            with open("accounts.json", mode="r") as file:
+                # reads old data
+                data = json.load(file)
+        except FileNotFoundError:
+            with open("accounts.json", mode="w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
+            # updating old data with new data
+            data.update(new_data)
 
-        if is_ok:
-            with open("accounts.txt", mode="a") as file:
-                file.write(f"\nWebsite: {website} | Email/Username: {email_or_username} | Password: {password}")
-
+            with open("accounts.json", mode="w") as file:
+                # saving the updated data
+                json.dump(data, file, indent=4)
+        finally:
             website_entry.delete(0, END)
             email_or_username_entry.delete(0, END)
             password_entry.delete(0, END)
