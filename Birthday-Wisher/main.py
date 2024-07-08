@@ -4,8 +4,9 @@ import random
 import smtplib
 
 today = (datetime.now().month, datetime.now().day)
-MY_EMAIL = "adhoomytesting@gmail.com"
-MY_PASSWORD = "usohtelgukkjsmtl"
+
+MY_EMAIL = ""  # enter email to send from in the quotes
+MY_PASSWORD = ""  # enter app password for email in the quotes
 
 data = pandas.read_csv("birthdays.csv")
 birthday_dict = {(data_row.month, data_row.day): data_row for (index, data_row) in data.iterrows()}
